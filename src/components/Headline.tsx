@@ -1,5 +1,13 @@
 import React from 'react';
 
-export default function Headline({title}){
-    return <h1>{title}</h1>
+
+
+export interface HeadlineProps {
+    title: string
+}
+
+export default function Headline({title}: HeadlineProps) {
+    return (
+            <h1>{title}</h1>
+    )
 }

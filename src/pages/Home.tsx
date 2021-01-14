@@ -1,22 +1,27 @@
-import React, {useState} from 'react';
-import Headline from "../components/Headline";
+import React from 'react';
 import styled from 'styled-components/macro'
+import TodoPanel from "./TodoPanel";
+import {Todo} from "../models/Settings";
 
-export default function Home() {
+interface HomeProps{
+    todos: Todo[]
+}
 
-    const [allTodo, setAllTodo] = useState({});
+export default function Home({todos} : HomeProps) {
+
     return (
         <WrapperStyled>
-            <Headline title={"OPEN"}/>
-            <Headline title={"IN PROGRESS"}/>
-            <Headline title={"DONE"}/>
+            <TodoPanel todos={todos} status={'OPEN'}/>
+            <TodoPanel todos={todos} status={'IN_PROGRESS'}/>
+            <TodoPanel todos={todos} status={'DONE'}/>
         </WrapperStyled>
     )
 }
 
 const WrapperStyled = styled.div`
-display: flex;
-justify-content: space-around;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+
 `
 
 

@@ -1,20 +1,28 @@
 import React from 'react';
 import {Status, Todo} from "../models/Settings";
-import SingleToDo from "../components/Todo";
+import Headline from "../components/Headline";
+import TodoCard from "../components/TodoCard";
+import styled from "styled-components/macro";
 
 interface TodoListProps {
     todos: Todo[]
+    status: Status
 }
 
-export default function TodoList({todos}: TodoListProps) {
+export default function TodoPanel({todos, status}: TodoListProps) {
 
-    const filterTodos = (status: Status) => {
-        return todos.filter(todo => todo.status === status)
-    }
+    const filteredTodos = todos.filter(todo => todo.status === status)
 
-    return(
-        filterTodos("OPEN").map(todo => (
-            <SingleToDo todo={todo}/>))
-        )
+    return (
+        <PanelStyled>
+            <Headline title={status}/>
+            <TodoCard todos = {filteredTodos}/>
+        </PanelStyled>
+    )
 
 };
+
+const PanelStyled = styled.div`
+display: grid;
+grid-auto-rows: min-content;
+`
