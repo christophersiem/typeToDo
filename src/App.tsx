@@ -1,32 +1,28 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Home from './pages/Home'
-import './App.css';
-import Footer from './components/Footer'
-import {Todo} from "./models/Settings";
+import ActionArea from './components/ActionArea'
+import styled from "styled-components/macro";
+import useTodo from "./hooks/useTodo";
 
-const initialState: Todo[] =
-    [{
-        title: "do homework",
-        status: "OPEN",
-    }, {
-        title: "learn typescript",
-        status: "IN_PROGRESS",
-    }, {
-        title: "drink beer",
-        status: "DONE",
-    }]
+
 
 function App() {
 
-    const [allTodo, setAllTodo] = useState(initialState);
-    console.log(allTodo)
+    const {allTodo, addTodo, advance, deleteTodo} = useTodo();
 
     return (
-        <div className="App">
-            <Home todos={allTodo}/>
-            <Footer allTodo={allTodo} setAllTodo={setAllTodo}/>
-        </div>
+        <AppWrapper>
+            <Home todos={allTodo} advance={advance} deleteTodo={deleteTodo}/>
+            <ActionArea addTodo={addTodo}/>
+        </AppWrapper>
     );
 }
 
+const AppWrapper = styled.div`
+  background-color: #f5f5f5;
+  height: 100vh;
+`
+
 export default App;
+
+

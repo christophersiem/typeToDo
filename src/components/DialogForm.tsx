@@ -6,17 +6,26 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import styled from "styled-components/macro";
-import {Todo} from "../models/Settings";
+
 
 interface DialogFormProps {
-    addTodo: (task: string) => void
+    handleClickAdd: (task: string) => void
     open: boolean;
     handleClickClose: () => void;
     handleClickOpen: () => void;
 }
 
-export default function DialogForm({addTodo, open, handleClickClose, handleClickOpen}: DialogFormProps) {
+export default function DialogForm({handleClickAdd, open, handleClickClose, handleClickOpen}: DialogFormProps) {
     const [task, setTask] = useState('');
+
+    const onClickAdd = () => {
+        handleClickAdd(task)
+        setTask('')
+    }
+    const onClickCancel = () => {
+        handleClickClose()
+        setTask('')
+    }
 
     return (
         <div>
@@ -30,17 +39,17 @@ export default function DialogForm({addTodo, open, handleClickClose, handleClick
                         value={task}
                         onChange={(e) => setTask(e.target.value)}
                         margin="dense"
-                        id="name"
-                        label="task"
-                        type="task"
+                        id="description"
+                        label="description"
+                        type="description"
                         fullWidth
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClickClose} color="primary">
+                    <Button onClick={onClickCancel} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={() => addTodo(task)} color="primary">
+                    <Button onClick={onClickAdd} color="primary">
                         Add
                     </Button>
                 </DialogActions>
@@ -55,7 +64,7 @@ position:fixed;
 border: none;
 width:60px;
 height:60px;
-bottom:40px;
+top:40px;
 right:40px;
 background-color:#0C9;
 color:#FFF;
