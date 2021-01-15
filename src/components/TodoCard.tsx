@@ -18,14 +18,15 @@ export default function TodoCard({todos, advance, deleteTodo}: TodoCardProps) {
     }
     return (
 
-        <div>
-            {todos.map(todo =>
-                <div onClick={() => advance(todo.id)}>
-                    <CardStyled key={todo.title} >{todo.title}
-                        <ButtonStyled onClick={(event) => onClickDelete(event, todo.id)}>delete</ButtonStyled>
-                    </CardStyled>
-                </div>)}
-        </div>
+
+            <div>
+                {todos.map(todo =>
+                    <div onClick={() => advance(todo.id)}>
+                        <CardStyled key={todo.title}>{todo.title}
+                            <ButtonStyled onClick={(event) => onClickDelete(event, todo.id)}>delete</ButtonStyled>
+                        </CardStyled>
+                    </div>)}
+            </div>
 
     )
 };
